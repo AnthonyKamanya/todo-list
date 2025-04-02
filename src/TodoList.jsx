@@ -18,7 +18,7 @@ function TodoList() {
   return (
     <ul>
       {todos.map((todo) => (
-        <TodoListItem todo={todo} key={todo.id} startDate={todo.startDate} />
+        <TodoListItem key={todo.id} todo={todo}  startDate={todo.startDate} />
       ))}
     </ul>
   );
