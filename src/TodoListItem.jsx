@@ -1,7 +1,7 @@
 function TodoListItem({ todo }) {
   return (
-    <li>
-      {todo.title} || {todo.startDate}
+    <li id={todo.id}>
+      {todo.title} 
     </li>
   );
 }
