@@ -1,7 +1,7 @@
-function TodoListItem({ todo }) {
+function TodoListItem({ todo, onCompleteTodo }) {
   return (
     <li id={todo.id}>
-      {todo.title} 
+      <form>{todo.title}</form>
     </li>
   );
 }
