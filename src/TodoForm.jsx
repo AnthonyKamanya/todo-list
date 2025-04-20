@@ -23,7 +23,7 @@ function TodoForm({ onAddTodo }) {
         ref={todoTitleInput}
         onChange={(event) => setWorkingTodoTitle(event.target.title.value)}
       />
-      <button>Add Todo</button>
+      <button disabled={workingTodoTitle === ""}>Add Todo</button>
     </form>
   );
 }
