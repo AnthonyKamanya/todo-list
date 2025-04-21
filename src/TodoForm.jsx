@@ -21,7 +21,7 @@ function TodoForm({ onAddTodo }) {
         name="title"
         placeholder="Please enter your text "
         ref={todoTitleInput}
-        onChange={(event) => setWorkingTodoTitle(event.target.title.value)}
+        onChange={(event) => setWorkingTodoTitle(event.target.value)}
       />
       <button disabled={workingTodoTitle === ""}>Add Todo</button>
     </form>
