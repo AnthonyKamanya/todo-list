@@ -6,8 +6,7 @@ function TodoForm({ onAddTodo }) {
 
   function handleAddTodo(title) {
     title.preventDefault();
-    const id = Date.now();
-    onAddTodo({ workingTodoTitle, id });
+    onAddTodo( workingTodoTitle);
     setWorkingTodoTitle("");
     todoTitleInput.current.focus();
   }

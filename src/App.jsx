@@ -5,9 +5,8 @@ import { useState } from "react";
 
 function App() {
   const [todoList, setTodoList] = useState([]);
-  function handleAddTodo(newTodo) {
-    const title = event.target.title.value;
-    newTodo = { title: title, id: Date.now(), isCompleted: false };
+  function handleAddTodo(title) {
+    const newTodo = { title: title, id: Date.now(), isCompleted: false };
     setTodoList([...todoList, newTodo]);
   }
   function completeTodo(id) {
