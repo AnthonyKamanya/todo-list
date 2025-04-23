@@ -22,12 +22,20 @@ export default [
     },
     rules: {
       ...js.configs.recommended.rules,
+      ...react.configs.recommended.rules,
+      ...react.configs['jsx-runtime'].rules,
       ...reactHooks.configs.recommended.rules,
-      "no-unused-vars": "warn", //this changes the error to a warning  default =>//['error', { varsIgnorePattern: '^[A-Z_]' }],
-      "react/prop-types": "off", //this suppresses warnings about not using prop-types
-      "react-refresh/only-export-components": [
-        "warn",
+      'react/jsx-no-target-blank': 'off',
+      'react/prop-types': 'off', //disables react/prop-types rule
+      'react-refresh/only-export-components': [
+        'warn',
         { allowConstantExport: true },
+        // 'no-unused-vars': 'warn', //this changes the error to a warning
+        // 'react/jsx-no-target-blank': 'off',
+        // 'react/prop-types': 'off', //this suppresses warnings about not using prop-types
+        // 'react-refresh/only-export-components': [
+        //   'warn',
+        //   { allowConstantExport: true },
       ],
     },
   },

@@ -1,7 +1,17 @@
-function TodoListItem({ todo }) {
+function TodoListItem({ todo, onCompleteTodo }) {
+  function handleChange() {
+    onCompleteTodo(todo.id);
+  }
   return (
     <li id={todo.id}>
-      {todo.title} 
+      <form>
+        <input
+          type="checkbox"
+          checked={todo.isCompleted}
+          onChange={handleChange}
+        />
+        {todo.title}
+      </form>
     </li>
   );
 }
