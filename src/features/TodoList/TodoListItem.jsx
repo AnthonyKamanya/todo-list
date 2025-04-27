@@ -10,7 +10,7 @@ function TodoListItem({ todo, onCompleteTodo, onUpdateTodo }) {
   }
 
   function handleCancel() {
-    workingTitle = todo.title;
+    setWorkingTitle(todo.title);
     setIsEditing(false);
   }
 
@@ -44,7 +44,7 @@ function TodoListItem({ todo, onCompleteTodo, onUpdateTodo }) {
                 id={`checkbox${todo.id}`}
                 type="checkbox"
                 checked={todo.isCompleted}
-                onChange={() => onCompleteTodo(todo.id)}
+                onChange={handleChange}
               />
             </label>
 
