@@ -58,6 +58,24 @@ function App() {
       headers: { Authorization: token, "Content-Type": "application/json" },
       body: JSON.stringify(payload),
     };
+    try {
+      setIsSaving({ isSaving: true });
+      const resp = await fetch(url, options);
+      if (!resp.ok) {
+        throw new Error(resp.message);
+      }
+      const { records } = await resp.json();
+      const savedTodo = { id: records.id, ...records.fields };
+      if (!records[0].fields.isCompleted) {
+        savedTodo.isCompleted = false;
+      }
+      setTodoList([...todoList, savedTodo]);
+    } catch (error) {
+      console.log(error);
+      setErrorMessage(error.message);
+    } finally {
+      setIsSaving(false);
+    }
   }
   function completeTodo(id) {
     const updatedTodos = todoList.map((todo) =>
