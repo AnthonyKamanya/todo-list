@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import TextInputWithLabel from "../../shared/TextInputWithLabel";
 
 function TodoListItem({ todo, onCompleteTodo, onUpdateTodo }) {
@@ -24,6 +24,9 @@ function TodoListItem({ todo, onCompleteTodo, onUpdateTodo }) {
     onUpdateTodo({ ...todo, title: workingTitle });
     setIsEditing(false);
   }
+  useEffect(() => {
+    setWorkingTitle(todo.title);
+  }, [todo]);
   return (
     <li id={todo.id}>
       <form onSubmit={handleUpdate}>
