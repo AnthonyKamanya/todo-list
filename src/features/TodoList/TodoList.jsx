@@ -4,7 +4,6 @@ function TodoList({ todoList, onCompleteTodo, onUpdateTodo, isLoading }) {
   const filteredTodoList = todoList.filter(
     (checkedTodo) => !checkedTodo.isCompleted
   );
-  console.log(isLoading);
 
   return filteredTodoList.length === 0 ? (
     isLoading ? (
