@@ -2,7 +2,10 @@ import "./App.css";
 import TodoList from "./features/TodoList/TodoList.jsx";
 import TodoForm from "./features/TodoForm.jsx";
 import { useEffect, useState } from "react";
+import TodosViewForm from "./features/TodosViewForm.jsx";
+
 function encodeUrl({ sortField, sortDirection }) {
+  const url = `https://api.airtable.com/v0/${import.meta.env.VITE_BASE_ID}/${import.meta.env.VITE_TABLE_NAME}`;
   let sortQuery = `sort[0][field]=${sortField}&sort[0][direction]=${sortDirection}`;
   return encodeURI(`${url}?${sortQuery}`);
 }
@@ -11,7 +14,6 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [isSaving, setIsSaving] = useState(false);
-  const url = `https://api.airtable.com/v0/${import.meta.env.VITE_BASE_ID}/${import.meta.env.VITE_TABLE_NAME}`;
   const token = `Bearer ${import.meta.env.VITE_PAT}`;
   const [sortField, setSortField] = useState("createdTime");
   const [sortDirection, setSortDirection] = useState("desc");
@@ -132,11 +134,9 @@ function App() {
           todo.id === id ? { ...originalTodo } : todo
         )
       );
-      setTodoList([...revertedTodos]);
     } finally {
       setIsSaving(false);
     }
-    setTodoList([...updatedTodos]);
   }
 
   async function completeTodo(id) {
@@ -200,6 +200,13 @@ function App() {
         isLoading={isLoading}
         onCompleteTodo={completeTodo}
         onUpdateTodo={handleUpdateTodo}
+      />
+      <hr />
+      <TodosViewForm
+        sortDirection={sortDirection}
+        setSortDirection={setSortDirection}
+        sortField={sortField}
+        setSortField={setSortField}
       />
       {errorMessage && (
         <div>
