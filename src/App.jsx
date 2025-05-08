@@ -176,7 +176,7 @@ function App() {
   return (
     <div>
       <h1>My Todos</h1>
-      <TodoForm onAddTodo={handleAddTodo} />
+      <TodoForm isSaving={isSaving} onAddTodo={handleAddTodo} />
       <TodoList
         todoList={todoList}
         isLoading={isLoading}
