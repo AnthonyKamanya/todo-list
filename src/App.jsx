@@ -122,7 +122,6 @@ function App() {
     } finally {
       setIsSaving(false);
     }
-    setTodoList([...updatedTodos]);
   }
 
   async function completeTodo(id) {
