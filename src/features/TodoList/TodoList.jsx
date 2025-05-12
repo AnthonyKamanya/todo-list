@@ -7,9 +7,9 @@ function TodoList({ todoList, onCompleteTodo, onUpdateTodo, isLoading }) {
 
   return filteredTodoList.length === 0 ? (
     isLoading ? (
-      <p>Todo list loading ... </p>
+      <p>Todo list loading ...</p>
     ) : (
-      <p>Add todo above to get started</p>
+      <p>Add todo above to get started </p>
     )
   ) : (
     <ul>

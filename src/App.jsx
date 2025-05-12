@@ -13,10 +13,11 @@ function App() {
 
   useEffect(() => {
     const fetchTodos = async () => {
-      setIsLoading({ isLoading: true });
+      setIsLoading(true);
       const options = { method: "GET", headers: { Authorization: token } };
       try {
         const resp = await fetch(url, options);
+
         if (!resp.ok) {
           throw new Error(resp.message);
         }
@@ -43,7 +44,6 @@ function App() {
 
   async function handleAddTodo(title) {
     const newTodo = { title: title, id: Date.now(), isCompleted: false };
-    setTodoList([...todoList, newTodo]);
     const payload = {
       records: [
         {
@@ -66,7 +66,7 @@ function App() {
         throw new Error(resp.message);
       }
       const { records } = await resp.json();
-      const savedTodo = { id: records[0].id, ...records.fields };
+      const savedTodo = { id: records[0].id, ...records[0].fields };
       if (!records[0].fields.isCompleted) {
         savedTodo.isCompleted = false;
       }
@@ -81,6 +81,7 @@ function App() {
 
   async function handleUpdateTodo(editedTodo) {
     const originalTodo = todoList.find((todo) => todo.id === editedTodo);
+    setTodoList([...updatedTodos]);
     const payload = {
       records: [
         {
@@ -103,14 +104,13 @@ function App() {
         throw new Error(resp.status);
       }
       const { records } = await resp.json();
-      const updatedTodo = { id: records[0]["id"], ...records.fields };
+      const updatedTodo = { id: records[0]["id"], ...records[0].fields };
       if (!records[0].fields.isCompleted) {
         updatedTodo.isCompleted = false;
       }
       const updatedTodos = todoList.map((todo) =>
         todo.id === updatedTodo.id ? { ...updatedTodo } : todo
       );
-      setTodoList([...updatedTodos]);
     } catch (error) {
       setErrorMessage(`${error.message}.Reverting todo...`);
       const revertedTodos = setTodoList(
@@ -153,7 +153,7 @@ function App() {
         throw new Error(resp.status);
       }
       const { records } = await resp.json();
-      const updatedTodo = { id: records[0]["id"], ...records.fields };
+      const updatedTodo = { id: records[0]["id"], ...records[0].fields };
       if (!records[0].fields.isCompleted) {
         updatedTodo.isCompleted = false;
       }
