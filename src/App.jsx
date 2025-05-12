@@ -80,7 +80,10 @@ function App() {
   }
 
   async function handleUpdateTodo(editedTodo) {
-    const originalTodo = todoList.find((todo) => todo.id === editedTodo);
+    const originalTodo = todoList.find((todo) => todo.id === editedTodo.id);
+    const updatedTodos = todoList.map((todo) =>
+      todo.id === editedTodo.id ? { ...editedTodo } : todo
+    );
     setTodoList([...updatedTodos]);
     const payload = {
       records: [
@@ -98,6 +101,7 @@ function App() {
       headers: { Authorization: token, "Content-Type": "application/json" },
       body: JSON.stringify(payload),
     };
+
     try {
       const resp = await fetch(url, options);
       if (!resp.ok) {
@@ -108,17 +112,13 @@ function App() {
       if (!records[0].fields.isCompleted) {
         updatedTodo.isCompleted = false;
       }
-      const updatedTodos = todoList.map((todo) =>
-        todo.id === updatedTodo.id ? { ...updatedTodo } : todo
-      );
     } catch (error) {
       setErrorMessage(`${error.message}.Reverting todo...`);
       const revertedTodos = setTodoList(
         updatedTodos.map((todo) =>
-          todo.id === id ? { ...originalTodo } : todo
+          todo.id === originalTodo.id ? { ...originalTodo } : todo
         )
       );
-      setTodoList([...revertedTodos]);
     } finally {
       setIsSaving(false);
     }
@@ -157,10 +157,6 @@ function App() {
       if (!records[0].fields.isCompleted) {
         updatedTodo.isCompleted = false;
       }
-      const updateTodos = todoList.map((todo) =>
-        todo.id === updatedTodo.id ? { ...updatedTodo } : todo
-      );
-      setTodoList([...updateTodos]);
     } catch (error) {
       setErrorMessage(`${error.message}.Reverting todo...`);
       const revertedTodos = setTodoList(
