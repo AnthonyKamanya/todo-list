@@ -125,6 +125,7 @@ function App() {
   }
 
   async function completeTodo(id) {
+    const originalTodo = todoList.find((todo) => todo.id === id);
     const updatedTodos = todoList.map((todo) =>
       todo.id === id ? { ...todo, isCompleted: true } : todo
     );
@@ -160,11 +161,8 @@ function App() {
     } catch (error) {
       setErrorMessage(`${error.message}.Reverting todo...`);
       const revertedTodos = setTodoList(
-        updatedTodos.map((todo) =>
-          todo.id === id ? { ...originalTodo } : todo
-        )
+        todoList.map((todo) => (todo.id === id ? { ...originalTodo } : todo))
       );
-      setTodoList([...revertedTodos]);
     } finally {
       setIsSaving(false);
     }
