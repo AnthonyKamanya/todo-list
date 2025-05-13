@@ -3,12 +3,30 @@ function TodosViewForm({
   setSortDirection,
   sortField,
   setSortField,
+  queryString,
+  setQueryString,
 }) {
   function preventRefresh(event) {
     event.preventDefault();
   }
+  function resetSearchInput() {
+    setQueryString("");
+  }
   return (
     <form className="form" onSubmit={preventRefresh}>
+      <div>
+        <label>Search todos:</label>
+        <input
+          type="text"
+          value={queryString}
+          onChange={(event) => {
+            setQueryString(event.target.value);
+          }}
+        />
+        <button type="button" onClick={resetSearchInput}>
+          Clear
+        </button>
+      </div>
       <div>
         <label className="sort by">Sort by</label>
         <select
