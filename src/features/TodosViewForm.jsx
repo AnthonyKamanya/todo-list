@@ -38,8 +38,6 @@ function TodosViewForm({
           <option value="title">Title</option>
           <option value="createdTime">Time added</option>
         </select>
-        {/* TODO:To fix this issue, nest the <input> in the <label>
-        or provide a for attribute on the <label> that matches a form field id. */}
         <label className="direction">Direction</label>
         <select
           value={sortDirection}

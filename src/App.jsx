@@ -18,7 +18,7 @@ function App() {
   function encodeUrl({ sortField, sortDirection, queryString }) {
     let sortQuery = `sort[0][field]=${sortField}&sort[0][direction]=${sortDirection}`;
     let searchQuery = "";
-    if (searchQuery) {
+    if (queryString) {
       searchQuery = `&filterByFormula=SEARCH("${queryString}",+title)`;
     }
     return encodeURI(`${url}?${sortQuery}${searchQuery}`);
@@ -170,7 +170,7 @@ function App() {
     };
     try {
       const resp = await fetch(
-        encodeUrl({ sortField, sortDirection, searchQuery }),
+        encodeUrl({ sortField, sortDirection, queryString }),
         options
       );
       if (!resp.ok) {
