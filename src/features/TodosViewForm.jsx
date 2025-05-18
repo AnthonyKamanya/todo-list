@@ -13,7 +13,7 @@ function TodosViewForm({
     setQueryString("");
   }
   return (
-    <form className="form" onSubmit={preventRefresh}>
+    <form id="id" className="form" onSubmit={preventRefresh}>
       <div>
         <label>Search todos:</label>
         <input
