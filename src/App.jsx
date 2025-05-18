@@ -127,11 +127,6 @@ function App() {
       if (!resp.ok) {
         throw new Error(resp.status);
       }
-      const { records } = await resp.json();
-      const updatedTodo = { id: records[0]["id"], ...records[0].fields };
-      if (!records[0].fields.isCompleted) {
-        updatedTodo.isCompleted = false;
-      }
     } catch (error) {
       setErrorMessage(`${error.message}.Reverting todo...`);
       const revertedTodos = setTodoList(
@@ -175,11 +170,6 @@ function App() {
       );
       if (!resp.ok) {
         throw new Error(resp.status);
-      }
-      const { records } = await resp.json();
-      const updatedTodo = { id: records[0]["id"], ...records[0].fields };
-      if (!records[0].fields.isCompleted) {
-        updatedTodo.isCompleted = false;
       }
     } catch (error) {
       setErrorMessage(`${error.message}.  Reverting todo...`);
