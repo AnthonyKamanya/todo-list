@@ -29,10 +29,12 @@ function App() {
       setIsLoading(true);
       const options = { method: "GET", headers: { Authorization: token } };
       try {
+
         const resp = await fetch(
           encodeUrl({ sortField, sortDirection, queryString }),
           options
         );
+
         if (!resp.ok) {
           throw new Error(resp.message);
         }
@@ -119,6 +121,7 @@ function App() {
       headers: { Authorization: token, "Content-Type": "application/json" },
       body: JSON.stringify(payload),
     };
+
     try {
       const resp = await fetch(
         encodeUrl({ sortField, sortDirection, queryString }),
@@ -171,6 +174,7 @@ function App() {
       if (!resp.ok) {
         throw new Error(resp.status);
       }
+
     } catch (error) {
       setErrorMessage(`${error.message}.  Reverting todo...`);
       const revertedTodos = todoList.map((todo) =>
@@ -178,6 +182,7 @@ function App() {
       );
 
       setTodoList([...revertedTodos]);
+
     } finally {
       setIsSaving(false);
     }
