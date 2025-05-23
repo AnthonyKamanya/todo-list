@@ -1,7 +1,7 @@
 import "./App.css";
 import TodoList from "./features/TodoList/TodoList.jsx";
 import TodoForm from "./features/TodoForm.jsx";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import TodosViewForm from "./features/TodosViewForm.jsx";
 
 function App() {
@@ -14,24 +14,22 @@ function App() {
   const [sortField, setSortField] = useState("createdTime");
   const [sortDirection, setSortDirection] = useState("desc");
   const [queryString, setQueryString] = useState("");
-
-  function encodeUrl({ sortField, sortDirection, queryString }) {
+  const encodeUrl = useCallback(() => {
     let sortQuery = `sort[0][field]=${sortField}&sort[0][direction]=${sortDirection}`;
     let searchQuery = "";
     if (queryString) {
       searchQuery = `&filterByFormula=SEARCH("${queryString}",+title)`;
     }
     return encodeURI(`${url}?${sortQuery}${searchQuery}`);
-  }
+  }, [sortField, sortDirection, queryString]);
 
   useEffect(() => {
     const fetchTodos = async () => {
       setIsLoading(true);
       const options = { method: "GET", headers: { Authorization: token } };
       try {
-
         const resp = await fetch(
-          encodeUrl({ sortField, sortDirection, queryString }),
+          encodeUrl(),
           options
         );
 
@@ -79,7 +77,7 @@ function App() {
     try {
       setIsSaving(true);
       const resp = await fetch(
-        encodeUrl({ sortField, sortDirection, queryString }),
+        encodeUrl(),
         options
       );
       if (!resp.ok) {
@@ -124,7 +122,7 @@ function App() {
 
     try {
       const resp = await fetch(
-        encodeUrl({ sortField, sortDirection, queryString }),
+        encodeUrl(),
         options
       );
       if (!resp.ok) {
@@ -168,13 +166,12 @@ function App() {
     };
     try {
       const resp = await fetch(
-        encodeUrl({ sortField, sortDirection, queryString }),
+        encodeUrl(),
         options
       );
       if (!resp.ok) {
         throw new Error(resp.status);
       }
-
     } catch (error) {
       setErrorMessage(`${error.message}.  Reverting todo...`);
       const revertedTodos = todoList.map((todo) =>
@@ -182,7 +179,6 @@ function App() {
       );
 
       setTodoList([...revertedTodos]);
-
     } finally {
       setIsSaving(false);
     }
