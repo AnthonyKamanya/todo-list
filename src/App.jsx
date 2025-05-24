@@ -3,6 +3,7 @@ import TodoList from "./features/TodoList/TodoList.jsx";
 import TodoForm from "./features/TodoForm.jsx";
 import { useEffect, useState, useCallback } from "react";
 import TodosViewForm from "./features/TodosViewForm.jsx";
+import styles from "./App.module.css";
 
 function App() {
   const [todoList, setTodoList] = useState([]);
@@ -28,10 +29,7 @@ function App() {
       setIsLoading(true);
       const options = { method: "GET", headers: { Authorization: token } };
       try {
-        const resp = await fetch(
-          encodeUrl(),
-          options
-        );
+        const resp = await fetch(encodeUrl(), options);
 
         if (!resp.ok) {
           throw new Error(resp.message);
@@ -76,10 +74,7 @@ function App() {
     };
     try {
       setIsSaving(true);
-      const resp = await fetch(
-        encodeUrl(),
-        options
-      );
+      const resp = await fetch(encodeUrl(), options);
       if (!resp.ok) {
         throw new Error(resp.message);
       }
@@ -121,10 +116,7 @@ function App() {
     };
 
     try {
-      const resp = await fetch(
-        encodeUrl(),
-        options
-      );
+      const resp = await fetch(encodeUrl(), options);
       if (!resp.ok) {
         throw new Error(resp.status);
       }
@@ -165,10 +157,7 @@ function App() {
       body: JSON.stringify(payload),
     };
     try {
-      const resp = await fetch(
-        encodeUrl(),
-        options
-      );
+      const resp = await fetch(encodeUrl(), options);
       if (!resp.ok) {
         throw new Error(resp.status);
       }
@@ -184,10 +173,10 @@ function App() {
     }
   }
   return (
-    <div>
+    <div className={styles.body}>
       <h1>My Todos</h1>
       <TodoForm isSaving={isSaving} onAddTodo={handleAddTodo} />
-      <TodoList
+      <TodoList 
         todoList={todoList}
         isLoading={isLoading}
         onCompleteTodo={completeTodo}
@@ -202,13 +191,15 @@ function App() {
         queryString={queryString}
         setQueryString={setQueryString}
       />
-      {errorMessage && (
-        <div>
-          <hr />
-          <p>{errorMessage}</p>
-          <button onClick={() => setErrorMessage("")}>Dismiss</button>
-        </div>
-      )}
+      <div className="errorMessage">
+        {errorMessage && (
+          <div>
+            <hr />
+            <p>{errorMessage}</p>
+            <button onClick={() => setErrorMessage("")}>Dismiss</button>
+          </div>
+        )}
+      </div>
     </div>
   );
 }
