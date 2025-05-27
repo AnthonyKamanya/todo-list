@@ -1,5 +1,10 @@
 import { useEffect, useState } from "react";
+import styled from "styled-components";
 
+const StyledViewTodoForm = styled.div`
+  background-color: antiquewhite;
+  padding: 0.5rem;
+`;
 function TodosViewForm({
   sortDirection,
   setSortDirection,
@@ -25,43 +30,45 @@ function TodosViewForm({
     setLocalQueryString("");
   }
   return (
-    <form id="id" className="form" onSubmit={preventRefresh}>
-      <div>
-        <label>Search todos:</label>
-        <input
-          type="text"
-          value={localQueryString}
-          onChange={(event) => {
-            setLocalQueryString(event.target.value);
-          }}
-        />
-        <button type="button" onClick={resetSearchInput}>
-          Clear
-        </button>
-      </div>
-      <div>
-        <label className="sort by">Sort by</label>
-        <select
-          value={sortField}
-          onChange={(event) => {
-            setSortField(event.target.value);
-          }}
-        >
-          <option value="title">Title</option>
-          <option value="createdTime">Time added</option>
-        </select>
-        <label className="direction">Direction</label>
-        <select
-          value={sortDirection}
-          onChange={(event) => {
-            setSortDirection(event.target.value);
-          }}
-        >
-          <option value="ascending">Ascending</option>
-          <option value="descending">Descending</option>
-        </select>
-      </div>
-    </form>
+    <StyledViewTodoForm>
+      <form id="id" className="form" onSubmit={preventRefresh}>
+        <div>
+          <label>Search todos:</label>
+          <input
+            type="text"
+            value={localQueryString}
+            onChange={(event) => {
+              setLocalQueryString(event.target.value);
+            }}
+          />
+          <button type="button" onClick={resetSearchInput}>
+            Clear
+          </button>
+        </div>
+        <div>
+          <label className="sort by">Sort by</label>
+          <select
+            value={sortField}
+            onChange={(event) => {
+              setSortField(event.target.value);
+            }}
+          >
+            <option value="title">Title</option>
+            <option value="createdTime">Time added</option>
+          </select>
+          <label className="direction">Direction</label>
+          <select
+            value={sortDirection}
+            onChange={(event) => {
+              setSortDirection(event.target.value);
+            }}
+          >
+            <option value="ascending">Ascending</option>
+            <option value="descending">Descending</option>
+          </select>
+        </div>
+      </form>
+    </StyledViewTodoForm>
   );
 }
 export default TodosViewForm;
