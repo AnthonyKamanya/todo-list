@@ -191,7 +191,7 @@ function App() {
         queryString={queryString}
         setQueryString={setQueryString}
       />
-      <div className="errorMessage">
+      <div className={styles.errorMessage}>
         {errorMessage && (
           <div>
             <hr />
