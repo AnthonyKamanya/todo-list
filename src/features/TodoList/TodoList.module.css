@@ -1,0 +1,7 @@
+.todoList {
+  color: var(--text-color);
+}
+.unorderedList{
+    padding: 0rem;
+    list-style: none;
+}

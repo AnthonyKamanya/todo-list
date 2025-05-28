@@ -1,0 +1,21 @@
+/* Typography system */
+h1,
+h2 {
+  font-family:
+    "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+
+/* Color system */
+
+:root {
+  --primary-color: blue;
+  --background-color: antiquewhite;
+  --text-color: purple;
+  --text-secondary-color: darkgrey;
+  --button-color: blue;
+  --input-background-color: green;
+}
+h1 {
+  color: var(--text-color);
+}
